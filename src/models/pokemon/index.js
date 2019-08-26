@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_POKEMON } from '../../../constants';
+import { API_POKEMON } from '../../constants';
 
 const listPokemon = async (_, args) => {
   const offset = args.offset || 1;
