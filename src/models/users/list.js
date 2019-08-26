@@ -1,11 +1,13 @@
-import {userData, userNotFound} from './__mocks__/users';
+import axios from 'axios';
 
-const listUsers = (_, args) => {
+const listUsers = async (_, args) => {
 
   // custom arguments
   const { page, perPage, q } = args;
+  const fetchFromAPI = await axios.get('https://jsonplaceholder.typicode.com/users');
+  const usersData = fetchFromAPI.data || {};
 
-  const filteredUsers = userData.filter(user => user.name.toLocaleLowerCase().includes(q.toLocaleLowerCase()));
+  const filteredUsers = usersData.filter(user => user.name.toLocaleLowerCase().includes(q.toLocaleLowerCase()));
 
   // set the pagination
   const result = paginate(filteredUsers, perPage, page);
